@@ -1,5 +1,12 @@
+var mouseDown = false;
+
+const bod = document.querySelector('html');
+bod.onmousedown = ()=>{ mouseDown = true; console.log(mouseDown)};
+bod.onmouseup = ()=> {mouseDown = false; console.log(mouseDown)};
+
 //Get the container of the grid
 const container = document.querySelector('.grid-container');
+
 
 
 
@@ -25,15 +32,13 @@ function CreateGrid(size){
         for (let index = 1; index <= size; index++){
             divname = 'div'+index;
             const div = document.createElement('div');
-            container.appendChild(div);
+            
     
             div.classList.add(divname);
             div.classList.add('cell');
             
-            div.onmouseenter = ()=> div.setAttribute('style', 'background-color:black;');
-            div.onmouseleave = ()=> div.setAttribute('style', 'background-color:white;');
-            div.onmousedown = ()=> Click(div);;
-
+            div.addEventListener('mouseover',ChangeColor);
+            
 
 
             /*
@@ -44,7 +49,13 @@ function CreateGrid(size){
             else
             div.textContent = '';
             */
+            container.appendChild(div);
         }
+    }
+}
+function ChangeColor(e){
+    if (e.type === 'mouseover' && mouseDown ) {
+        e.target.style.backgroundColor = 'black';
     }
 }
 
