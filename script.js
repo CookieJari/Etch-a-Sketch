@@ -1,3 +1,4 @@
+// WE take a global mousedown so that the user can hold and draw
 var mouseDown = false;
 
 const bod = document.querySelector('html');
@@ -7,21 +8,13 @@ bod.onmouseup = ()=> {mouseDown = false; console.log(mouseDown)};
 //Get the container of the grid
 const container = document.querySelector('.grid-container');
 
-
-
-
+//get the button and add a thing
 const btn = document.querySelector('.btn');
 btn.onclick= ()=> click();
 
+//fire the default 16x16 grid
 CreateGrid(16);
 
-function Click(div){
-    div.setAttribute('style', 'background-color:black;');
-    div.onmouseleave = ()=> pass;
-
-
-
-}
 
 function CreateGrid(size){
 
@@ -33,28 +26,22 @@ function CreateGrid(size){
             divname = 'div'+index;
             const div = document.createElement('div');
             
-    
             div.classList.add(divname);
             div.classList.add('cell');
             
             div.addEventListener('mouseover',ChangeColor);
-            
+            div.addEventListener('mousedown',ChangeColor);
 
-
-            /*
-            if(row===1)
-            div.textContent = index;
-            else if (index===1)
-            div.textContent =row;
-            else
-            div.textContent = '';
-            */
             container.appendChild(div);
         }
     }
 }
+
 function ChangeColor(e){
     if (e.type === 'mouseover' && mouseDown ) {
+        e.target.style.backgroundColor = 'black';
+    }
+    else if(e.type==='mousedown'){
         e.target.style.backgroundColor = 'black';
     }
 }
