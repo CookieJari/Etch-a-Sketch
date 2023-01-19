@@ -2,26 +2,65 @@
 const container = document.querySelector('.grid-container');
 
 
-for (let row = 1; row <= 16; row++) {
+
+const btn = document.querySelector('.btn');
+btn.onclick= ()=> click();
+
+CreateGrid(16);
+
+function Click(div){
+    div.setAttribute('style', 'background-color:black;');
+    div.onmouseleave = ()=> pass;
+
+
+
+}
+
+function CreateGrid(size){
+
+    container.setAttribute('style', 'grid-template-columns: repeat('+size+',1fr);')
+
+    for (let row = 1; row <= size; row++) {
     
-    for (let index = 1; index <= 16; index++){
-        divname = 'div'+index;
-        const div = document.createElement('div');
-        container.appendChild(div);
+        for (let index = 1; index <= size; index++){
+            divname = 'div'+index;
+            const div = document.createElement('div');
+            container.appendChild(div);
+    
+            div.classList.add(divname);
+            div.classList.add('cell');
+            
+            div.onmouseenter = ()=> div.setAttribute('style', 'background-color:black;');
+            div.onmouseleave = ()=> div.setAttribute('style', 'background-color:white;');
+            div.onmousedown = ()=> Click(div);;
 
-        div.classList.add(divname);
-        div.classList.add('cell');
 
-        /*
-        if(row===1)
-        div.textContent = index;
-        else if (index===1)
-        div.textContent =row;
-        else
-        div.textContent = '';
-        */
-       
+
+            /*
+            if(row===1)
+            div.textContent = index;
+            else if (index===1)
+            div.textContent =row;
+            else
+            div.textContent = '';
+            */
+        }
     }
-    
+}
 
+function ClearGrid(){
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
+    }
+}
+
+function click(){
+    amt = prompt("Enter how many boxes per side");
+    if(amt<101){
+        ClearGrid();
+        CreateGrid(amt);
+    }
+    else
+        alert("Number too big");
+    
 }
