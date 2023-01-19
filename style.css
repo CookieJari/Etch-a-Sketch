@@ -1,0 +1,18 @@
+html{
+    box-sizing: border-box;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(16,1fr);
+    grid-auto-rows: minmax(10px,auto);
+
+}
+.cell{
+    text-align: center;
+    border: 1px solid rgb(83, 83, 83);
+    
+}
+.cell:hover{
+    background-color: black;
+}
